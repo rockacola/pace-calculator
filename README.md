@@ -35,13 +35,14 @@ npm run preview      # preview production build locally
 
 ```text
 src/
-├── stores/         # Pinia stores
+├── assets/         # CSS entry point + design tokens
+├── components/     # Reusable UI components
+├── composables/    # Reactive stateful logic
+├── constants/      # Static data (distances, zones)
 ├── utils/          # Pure calculation utilities (deterministic, fully tested)
 ├── views/          # Page-level Vue components
-├── components/     # Shared UI components
 ├── router/         # Vue Router config
-├── test/           # Vitest unit tests
-└── assets/         # CSS entry point
+└── test/           # Vitest unit tests
 ```
 
 ## Deployment

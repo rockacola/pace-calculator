@@ -1,17 +1,68 @@
 @import 'tailwindcss';
 
-/* Prevent text size adjustment on orientation change (iOS) */
+/* ── Design tokens ──────────────────────────────────────────────────────────── */
+
+@theme {
+  --color-ink: #0c4a6e; /* sky-900 */
+  --color-ink-80: rgba(12, 74, 110, 0.8);
+  --color-ink-60: rgba(12, 74, 110, 0.6);
+  --color-paper: #f0f9ff; /* sky-50 */
+  --color-paper-2: #e0f2fe; /* sky-100 */
+  --color-line: #bae6fd; /* sky-200 */
+  --color-line-strong: #7dd3fc; /* sky-300 */
+  --color-accent: #0ea5e9; /* sky-500 */
+  --color-accent-soft: #f0f9ff; /* sky-50 */
+  --color-accent-ink: #0369a1; /* sky-700 */
+  --color-brand-ink: #0369a1; /* sky-700 */
+}
+
+/* Shorthand aliases for SVG fill/stroke attributes and inline style bindings */
+:root {
+  --ink: var(--color-ink);
+  --ink-80: var(--color-ink-80);
+  --ink-60: var(--color-ink-60);
+  --paper: var(--color-paper);
+  --paper-2: var(--color-paper-2);
+  --line: var(--color-line);
+  --line-strong: var(--color-line-strong);
+  --accent: var(--color-accent);
+  --accent-soft: var(--color-accent-soft);
+  --accent-ink: var(--color-accent-ink);
+  --font-display: Georgia, 'Times New Roman', serif;
+}
+
+/* ── Base ───────────────────────────────────────────────────────────────────── */
+
 html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
 
-/* Disable double-tap zoom on tap targets */
 * {
   touch-action: manipulation;
 }
 
-/* Prevent pull-to-refresh interfering with scroll */
 body {
+  background: var(--paper-2);
+  color: var(--ink);
   overscroll-behavior-y: contain;
+}
+
+@layer components {
+  /* ── Pulse animation ─────────────────────────────────────────────────────── */
+
+  @keyframes pulse-in {
+    from {
+      opacity: 0.55;
+      transform: scale(0.975);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .pulse-active {
+    animation: pulse-in 0.35s ease-out;
+  }
 }
