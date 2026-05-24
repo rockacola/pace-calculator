@@ -89,11 +89,39 @@ const {
           :heat-penalty="heatPenalty"
           :altitude-penalty="altitudePenalty"
         />
-        <div
-          class="rounded-lg border border-dashed border-line px-3.5 py-3 font-mono text-xs leading-relaxed text-ink-60"
-        >
-          <span class="text-ink-80">Method:</span> Riegel formula T₂ = T₁ × (D₂/D₁)<sup>1.06</sup>.
-          Training zones derived from threshold pace (estimated 1-hour race pace).
+        <div class="overflow-hidden rounded-xl border border-line-strong bg-paper">
+          <div
+            class="border-b border-line px-4 py-2.5 font-mono text-xs uppercase tracking-wider text-ink-60"
+          >
+            How it works
+          </div>
+          <div class="divide-y divide-line">
+            <div class="px-4 py-3.5">
+              <p class="mb-1 font-mono text-xs font-semibold text-ink">The formula</p>
+              <p class="text-xs leading-relaxed text-ink-60">
+                Predictions use the Riegel (1977) formula:
+                <span class="font-mono text-ink-80">T₂ = T₁ × (D₂/D₁)<sup>1.06</sup></span
+                >. The exponent 1.06 captures the non-linear slowdown as distance grows. Pace
+                degrades, it does not scale linearly.
+              </p>
+            </div>
+            <div class="px-4 py-3.5">
+              <p class="mb-1 font-mono text-xs font-semibold text-ink">Accuracy</p>
+              <p class="text-xs leading-relaxed text-ink-60">
+                The formula assumes a recent, all-out race effort as input, not a training run or
+                time trial. It tends to be optimistic at the marathon for first-timers; add a 3–5%
+                buffer if you haven't run the distance before.
+              </p>
+            </div>
+            <div class="px-4 py-3.5">
+              <p class="mb-1 font-mono text-xs font-semibold text-ink">Limitations</p>
+              <p class="text-xs leading-relaxed text-ink-60">
+                Heat, wind, and elevation are not modelled. Beyond the marathon, reliability drops
+                further due to fuelling and pacing complexity. Training zones are estimated from
+                your predicted 1-hour race pace (threshold), not a lab test.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
 
