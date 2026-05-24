@@ -2,6 +2,7 @@
 import { computed } from 'vue';
 
 import BaseChip from '@/components/BaseChip.vue';
+import Icon from '@/components/BaseIcon.vue';
 import BasePanel from '@/components/BasePanel.vue';
 import TimeInput from '@/components/TimeInput.vue';
 import { KM_DISTANCES, MI_DISTANCES } from '@/constants/distances';
@@ -33,7 +34,10 @@ function onCustomKilometersInput(event: Event) {
 
 <template>
   <BasePanel title="Inputs">
-    <label class="mb-2.5 block font-mono text-xs uppercase tracking-wider text-ink-60">
+    <label
+      class="mb-2.5 flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-ink-60"
+    >
+      <Icon name="ruler" class="h-3 w-3 shrink-0" />
       Race distance
     </label>
     <div class="flex flex-wrap gap-1.5" :class="distanceId === 'custom' ? 'mb-3' : 'mb-0'">
@@ -60,7 +64,10 @@ function onCustomKilometersInput(event: Event) {
     </div>
 
     <div class="h-6" />
-    <label class="mb-2.5 block font-mono text-xs uppercase tracking-wider text-ink-60">
+    <label
+      class="mb-2.5 flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider text-ink-60"
+    >
+      <Icon name="clock" class="h-3 w-3 shrink-0" />
       Goal time
     </label>
     <TimeInput

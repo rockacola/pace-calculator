@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AdjustmentsPanel from '@/components/AdjustmentsPanel.vue';
+import Icon from '@/components/BaseIcon.vue';
 import BasePanel from '@/components/BasePanel.vue';
 import EquivalentsTable from '@/components/EquivalentsTable.vue';
 import GoalPacePanel from '@/components/GoalPacePanel.vue';
@@ -97,7 +98,10 @@ const {
           </div>
           <div class="divide-y divide-line">
             <div class="px-4 py-3.5">
-              <p class="mb-1 font-mono text-xs font-semibold text-ink">The formula</p>
+              <p class="mb-1 flex items-center gap-1.5 font-mono text-xs font-semibold text-ink">
+                <Icon name="braces" class="h-3 w-3 shrink-0 text-ink-60" />
+                The formula
+              </p>
               <p class="text-xs leading-relaxed text-ink-60">
                 Predictions use the Riegel (1977) formula:
                 <span class="font-mono text-ink-80">T₂ = T₁ × (D₂/D₁)<sup>1.06</sup></span
@@ -106,7 +110,10 @@ const {
               </p>
             </div>
             <div class="px-4 py-3.5">
-              <p class="mb-1 font-mono text-xs font-semibold text-ink">Accuracy</p>
+              <p class="mb-1 flex items-center gap-1.5 font-mono text-xs font-semibold text-ink">
+                <Icon name="circle-check" class="h-3 w-3 shrink-0 text-ink-60" />
+                Accuracy
+              </p>
               <p class="text-xs leading-relaxed text-ink-60">
                 The formula assumes a recent, all-out race effort as input, not a training run or
                 time trial. It tends to be optimistic at the marathon for first-timers; add a 3–5%
@@ -114,7 +121,10 @@ const {
               </p>
             </div>
             <div class="px-4 py-3.5">
-              <p class="mb-1 font-mono text-xs font-semibold text-ink">Limitations</p>
+              <p class="mb-1 flex items-center gap-1.5 font-mono text-xs font-semibold text-ink">
+                <Icon name="circle-alert" class="h-3 w-3 shrink-0 text-ink-60" />
+                Limitations
+              </p>
               <p class="text-xs leading-relaxed text-ink-60">
                 Heat, wind, and elevation are not modelled. Beyond the marathon, reliability drops
                 further due to fuelling and pacing complexity. Training zones are estimated from

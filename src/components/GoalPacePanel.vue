@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, nextTick, ref, watch } from 'vue';
 
+import Icon from '@/components/BaseIcon.vue';
 import BasePanel from '@/components/BasePanel.vue';
 import { ZONES } from '@/constants/zones';
 import { formatTime, showPace } from '@/utils/paceUtils';
@@ -76,8 +77,14 @@ const stripPosition = computed(() => {
       />
     </div>
     <div class="mt-1.5 flex justify-between font-mono text-[10px] text-ink-60">
-      <span>Fast</span>
-      <span>Easy</span>
+      <span class="flex items-center gap-0.5">
+        <Icon name="zap" class="h-2.5 w-2.5" />
+        Fast
+      </span>
+      <span class="flex items-center gap-0.5">
+        Easy
+        <Icon name="leaf" class="h-2.5 w-2.5" />
+      </span>
     </div>
   </BasePanel>
 </template>

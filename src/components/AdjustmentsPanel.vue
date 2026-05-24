@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 
+import Icon from '@/components/BaseIcon.vue';
+
 const props = defineProps<{
   altitudeMeters: number;
   altitudePenalty: number;
@@ -52,11 +54,11 @@ const altitudePenaltyPercent = computed(
         :class="{ 'border-b': showAdvanced }"
       >
         <span>Adjustments</span>
-        <span
-          class="inline-block text-xs transition-transform duration-200"
-          :class="{ 'rotate-45': showAdvanced }"
-          >+</span
-        >
+        <Icon
+          name="chevron-down"
+          class="h-3.5 w-3.5 transition-transform duration-200"
+          :class="{ 'rotate-180': showAdvanced }"
+        />
       </div>
     </button>
     <div
@@ -66,7 +68,10 @@ const altitudePenaltyPercent = computed(
       <div class="px-5 py-4">
         <div class="mb-4">
           <div class="mb-2 flex items-center justify-between">
-            <label class="font-mono text-xs uppercase tracking-wider text-ink-60">
+            <label
+              class="flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-ink-60"
+            >
+              <Icon name="thermometer" class="h-3 w-3 shrink-0" />
               Heat · race day
             </label>
             <div class="flex items-center gap-2">
@@ -117,7 +122,12 @@ const altitudePenaltyPercent = computed(
         </div>
         <div>
           <div class="mb-2 flex items-baseline justify-between">
-            <label class="font-mono text-xs uppercase tracking-wider text-ink-60">Altitude</label>
+            <label
+              class="flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-ink-60"
+            >
+              <Icon name="mountain" class="h-3 w-3 shrink-0" />
+              Altitude
+            </label>
             <span class="font-mono text-xs tabular-nums text-ink">{{ displayAltitude }}</span>
           </div>
           <input
