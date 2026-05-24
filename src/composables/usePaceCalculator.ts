@@ -37,17 +37,19 @@ export function usePaceCalculator() {
   const secondsPerKilometer = computed(() =>
     goalSeconds.value > 0 && goalKilometers.value > 0 ? goalSeconds.value / goalKilometers.value : 0
   );
-  const secondsPerMile = computed(() => secondsPerKilometer.value * 1.609344);
-
-  const heatPenalty = computed(() => Math.max(0, (temperatureCelsius.value - 12) * 2));
+  const heatPenalty = computed(() =>
+    Math.max(0, (temperatureCelsius.value - 12) * 0.004 * secondsPerKilometer.value)
+  );
   const altitudePenalty = computed(
-    () => Math.max(0, (altitudeMeters.value - 500) / 300) * 0.015 * secondsPerKilometer.value
+    () => Math.max(0, (altitudeMeters.value - 1000) / 300) * 0.015 * secondsPerKilometer.value
   );
   const adjusted = computed(() =>
     showAdvanced.value
       ? secondsPerKilometer.value + heatPenalty.value + altitudePenalty.value
       : secondsPerKilometer.value
   );
+
+  const adjustedGoalSeconds = computed(() => adjusted.value * goalKilometers.value);
 
   const equivalents = computed<Equivalent[]>(() => {
     const distances = unit.value === 'km' ? KM_DISTANCES : MI_DISTANCES;
@@ -57,8 +59,10 @@ export function usePaceCalculator() {
         abbreviation: d.abbreviation,
         id: d.id,
         km: d.km as number,
-        pace: predict(goalSeconds.value, goalKilometers.value, d.km as number) / (d.km as number),
-        seconds: predict(goalSeconds.value, goalKilometers.value, d.km as number),
+        pace:
+          predict(adjustedGoalSeconds.value, goalKilometers.value, d.km as number) /
+          (d.km as number),
+        seconds: predict(adjustedGoalSeconds.value, goalKilometers.value, d.km as number),
       }));
   });
 
@@ -67,7 +71,7 @@ export function usePaceCalculator() {
     let high = 30;
     for (let i = 0; i < 30; i++) {
       const mid = (low + high) / 2;
-      if (predict(goalSeconds.value, goalKilometers.value, mid) > 3600) {
+      if (predict(adjustedGoalSeconds.value, goalKilometers.value, mid) > 3600) {
         high = mid;
       } else {
         low = mid;
@@ -88,6 +92,7 @@ export function usePaceCalculator() {
 
   return {
     adjusted,
+    adjustedGoalSeconds,
     altitudeMeters,
     altitudePenalty,
     customKilometers,
@@ -98,7 +103,6 @@ export function usePaceCalculator() {
     goalSeconds,
     heatPenalty,
     secondsPerKilometer,
-    secondsPerMile,
     showAdvanced,
     temperatureCelsius,
     thresholdPace,

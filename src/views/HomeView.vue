@@ -12,6 +12,7 @@ const appVersion = __APP_VERSION__;
 
 const {
   adjusted,
+  adjustedGoalSeconds,
   altitudeMeters,
   altitudePenalty,
   customKilometers,
@@ -21,8 +22,6 @@ const {
   goalKilometers,
   goalSeconds,
   heatPenalty,
-  secondsPerKilometer,
-  secondsPerMile,
   showAdvanced,
   temperatureCelsius,
   thresholdPace,
@@ -86,8 +85,9 @@ const {
           v-model:show-advanced="showAdvanced"
           v-model:temperature-celsius="temperatureCelsius"
           v-model:altitude-meters="altitudeMeters"
-          :heat-penalty="heatPenalty"
           :altitude-penalty="altitudePenalty"
+          :heat-penalty="heatPenalty"
+          :unit="unit"
         />
         <div class="overflow-hidden rounded-xl border border-line-strong bg-paper">
           <div
@@ -128,14 +128,9 @@ const {
       <!-- Right: results -->
       <div class="flex flex-col gap-5">
         <GoalPacePanel
-          :adjusted="adjusted"
-          :altitude-penalty="altitudePenalty"
           :distance-abbreviation="distanceAbbreviation"
-          :goal-seconds="goalSeconds"
-          :heat-penalty="heatPenalty"
-          :seconds-per-kilometer="secondsPerKilometer"
-          :seconds-per-mile="secondsPerMile"
-          :show-advanced="showAdvanced"
+          :goal-seconds="adjustedGoalSeconds"
+          :seconds-per-kilometer="adjusted"
           :threshold-pace="thresholdPace"
           :unit="unit"
           :unit-label="unitLabel"
@@ -144,7 +139,7 @@ const {
           <PaceCurve
             :equivalents="equivalents"
             :goal-dist="goalKilometers"
-            :goal-seconds="goalSeconds"
+            :goal-seconds="adjustedGoalSeconds"
           />
           <EquivalentsTable
             class="-mx-5 -mb-4 mt-4 border-t border-line"

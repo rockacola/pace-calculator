@@ -6,13 +6,9 @@ import { ZONES } from '@/constants/zones';
 import { formatTime, showPace } from '@/utils/paceUtils';
 
 const props = defineProps<{
-  adjusted: number;
-  altitudePenalty: number;
   distanceAbbreviation: string;
   goalSeconds: number;
-  heatPenalty: number;
   secondsPerKilometer: number;
-  showAdvanced: boolean;
   thresholdPace: number;
   unit: 'km' | 'mi';
   unitLabel: string;
@@ -62,13 +58,7 @@ const stripPosition = computed(() => {
         </div>
       </div>
     </div>
-    <div
-      v-if="showAdvanced && (heatPenalty > 0 || altitudePenalty > 0)"
-      class="mb-6 font-mono text-xs text-accent-ink"
-    >
-      Adjusted: {{ showPace(adjusted, unit) }} {{ unitLabel }}
-    </div>
-    <div v-else class="mb-6" />
+    <div class="mb-6" />
 
     <!-- Pace spectrum strip -->
     <div class="relative h-3 overflow-hidden rounded-full">
