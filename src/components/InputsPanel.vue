@@ -1,16 +1,21 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import BaseChip from '@/components/BaseChip.vue';
 import BasePanel from '@/components/BasePanel.vue';
 import TimeInput from '@/components/TimeInput.vue';
-import { DISTANCES } from '@/constants/distances';
+import { KM_DISTANCES, MI_DISTANCES } from '@/constants/distances';
 import { formatTime } from '@/utils/paceUtils';
 
-defineProps<{
+const props = defineProps<{
   customKilometers: number;
   distanceId: string;
   goalKilometers: number;
   goalSeconds: number;
+  unit: 'km' | 'mi';
 }>();
+
+const distances = computed(() => (props.unit === 'km' ? KM_DISTANCES : MI_DISTANCES));
 
 const emit = defineEmits<{
   'update:customKilometers': [value: number];
@@ -33,7 +38,7 @@ function onCustomKilometersInput(event: Event) {
     </label>
     <div class="flex flex-wrap gap-1.5" :class="distanceId === 'custom' ? 'mb-3' : 'mb-0'">
       <BaseChip
-        v-for="distance in DISTANCES"
+        v-for="distance in distances"
         :key="distance.id"
         :active="distanceId === distance.id"
         @click="emit('update:distanceId', distance.id)"

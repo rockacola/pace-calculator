@@ -1,6 +1,6 @@
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
-import { DISTANCES } from '@/constants/distances';
+import { ALL_DISTANCES, KM_DISTANCES, MI_DISTANCES } from '@/constants/distances';
 import { predict } from '@/utils/paceUtils';
 
 export interface Equivalent {
@@ -21,8 +21,15 @@ export function usePaceCalculator() {
   const unit = ref<'km' | 'mi'>('km');
 
   const selectedDistance = computed(
-    () => DISTANCES.find((distance) => distance.id === distanceId.value)!
+    () => ALL_DISTANCES.find((distance) => distance.id === distanceId.value)!
   );
+
+  watch(unit, (newUnit) => {
+    const validIds = (newUnit === 'km' ? KM_DISTANCES : MI_DISTANCES).map((d) => d.id);
+    if (!validIds.includes(distanceId.value)) {
+      distanceId.value = 'marathon';
+    }
+  });
   const goalKilometers = computed(() =>
     distanceId.value === 'custom' ? customKilometers.value : (selectedDistance.value.km as number)
   );
@@ -42,21 +49,18 @@ export function usePaceCalculator() {
       : secondsPerKilometer.value
   );
 
-  const equivalents = computed<Equivalent[]>(() =>
-    [
-      { abbreviation: '5K', id: '5k', km: 5 },
-      { abbreviation: '10K', id: '10k', km: 10 },
-      { abbreviation: '15K', id: '15k', km: 15 },
-      { abbreviation: 'HM', id: 'hm', km: 21.0975 },
-      { abbreviation: 'FM', id: 'fm', km: 42.195 },
-    ].map((entry) => ({
-      abbreviation: entry.abbreviation,
-      id: entry.id,
-      km: entry.km,
-      pace: predict(goalSeconds.value, goalKilometers.value, entry.km) / entry.km,
-      seconds: predict(goalSeconds.value, goalKilometers.value, entry.km),
-    }))
-  );
+  const equivalents = computed<Equivalent[]>(() => {
+    const distances = unit.value === 'km' ? KM_DISTANCES : MI_DISTANCES;
+    return distances
+      .filter((d) => d.km !== null)
+      .map((d) => ({
+        abbreviation: d.abbreviation,
+        id: d.id,
+        km: d.km as number,
+        pace: predict(goalSeconds.value, goalKilometers.value, d.km as number) / (d.km as number),
+        seconds: predict(goalSeconds.value, goalKilometers.value, d.km as number),
+      }));
+  });
 
   const thresholdKm = computed(() => {
     let low = 5;

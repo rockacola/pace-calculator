@@ -80,6 +80,7 @@ const {
           v-model:custom-kilometers="customKilometers"
           v-model:goal-seconds="goalSeconds"
           :goal-kilometers="goalKilometers"
+          :unit="unit"
         />
         <AdjustmentsPanel
           v-model:show-advanced="showAdvanced"
@@ -116,13 +117,14 @@ const {
             :goal-dist="goalKilometers"
             :goal-seconds="goalSeconds"
           />
+          <EquivalentsTable
+            class="-mx-5 -mb-4 mt-4 border-t border-line"
+            :equivalents="equivalents"
+            :goal-km="goalKilometers"
+            :unit="unit"
+            :unit-label="unitLabel"
+          />
         </BasePanel>
-        <EquivalentsTable
-          :equivalents="equivalents"
-          :goal-km="goalKilometers"
-          :unit="unit"
-          :unit-label="unitLabel"
-        />
         <TrainingZonesPanel :threshold-pace="thresholdPace" :unit="unit" />
       </div>
     </div>
