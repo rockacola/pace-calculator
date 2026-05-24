@@ -67,6 +67,15 @@ function onCustomKilometersInput(event: Event) {
       :model-value="goalSeconds"
       @update:model-value="emit('update:goalSeconds', $event)"
     />
+    <input
+      class="mt-3 w-full accent-[var(--accent)]"
+      type="range"
+      :min="60"
+      :max="36000"
+      :step="60"
+      :value="Math.min(Math.max(goalSeconds, 60), 36000)"
+      @input="emit('update:goalSeconds', Number(($event.target as HTMLInputElement).value))"
+    />
 
     <div
       class="mt-5 flex justify-between rounded-lg border border-line bg-paper-2 px-3.5 py-3 font-mono text-xs text-ink-80"

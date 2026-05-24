@@ -108,6 +108,7 @@ const {
           :seconds-per-kilometer="secondsPerKilometer"
           :seconds-per-mile="secondsPerMile"
           :show-advanced="showAdvanced"
+          :threshold-pace="thresholdPace"
           :unit="unit"
           :unit-label="unitLabel"
         />

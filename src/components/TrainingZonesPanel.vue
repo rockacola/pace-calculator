@@ -32,10 +32,11 @@ defineProps<{
         <span class="inline-block h-2 w-2 rounded-sm" :style="{ background: zone.color }" />
         <span class="text-sm font-medium text-ink">{{ zone.label }}</span>
         <span class="text-xs leading-snug text-ink-60">{{ zone.description }}</span>
-        <span class="text-right font-mono text-xs tabular-nums text-ink">
+        <span class="text-right font-mono text-xs tabular-nums text-ink whitespace-nowrap">
           {{ showPace(thresholdPace * zone.range[1], unit) }}–{{
             showPace(thresholdPace * zone.range[0], unit)
           }}
+          <span class="text-ink-60">/ {{ unit }}</span>
         </span>
       </div>
     </div>
