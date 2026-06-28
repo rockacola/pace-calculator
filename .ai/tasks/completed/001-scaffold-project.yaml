@@ -1,0 +1,9 @@
+id: '001-scaffold-project'
+title: Scaffold project
+status: done
+agent: implementer
+created_at: '2026-05-23'
+description: >
+  Set up the Vue 3 + Vite + Tailwind v4 + Pinia + Vitest project scaffold
+  with ESLint, Prettier, TypeScript, and GitHub Actions deploy workflow.
+output: Initial project skeleton with all tooling configured and CI pipeline in place.

@@ -1,0 +1,6 @@
+domains:
+  - name: application
+    owner: rockacola@gmail.com
+    paths:
+      - src/
+      - public/

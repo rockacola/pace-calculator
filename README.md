@@ -57,4 +57,4 @@ npm run build
 ## See also
 
 - [`docs/overview.md`](docs/overview.md) — architecture and design decisions
-- [`docs/tasks.md`](docs/tasks.md) — phased implementation task list
+- [`.ai/tasks/`](.ai/tasks/) — task tracking (active and completed)

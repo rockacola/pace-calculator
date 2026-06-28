@@ -1,0 +1,18 @@
+id: '002-port-pace-calculator'
+title: Port pace calculator from Next.js source
+status: done
+agent: implementer
+created_at: '2026-05-23'
+depends_on:
+  - '001-scaffold-project'
+description: |
+  Port the pace calculator from the Next.js/React source (PaceCalculatorClient.tsx) into the Vue 3 scaffold. Covers:
+  - paceUtils.ts: predict, fmtPace, fmtTime pure functions
+  - distances.ts / zones.ts: constants
+  - usePaceCalculator composable: all reactive state and derived values
+  - TimeInput.vue: HH:MM:SS input widget
+  - PaceRibbon.vue: animated pace bar
+  - PaceCurve.vue: SVG Riegel prediction curve
+  - HomeView.vue: full calculator layout (inputs, results, zones)
+  - CSS design system: tokens, component classes, animations
+output: Fully functional pace calculator matching the Next.js source, broken into panel components with shared composable.
